@@ -79,19 +79,20 @@ def _wait_for_receipt(tx_hash, timeout=90):
 
 def _sign_tx(private_key, to, data_hex, gas=80000):
     from eth_account import Account
+    from eth_utils import to_checksum_address
     acct = Account.from_key(private_key)
     gas_price = int(_get_gas_price() * 1.4)
     tx = {
         "nonce":    _get_nonce(acct.address),
         "gasPrice": gas_price,
         "gas":      gas,
-        "to":       to,
+        "to":       to_checksum_address(to),
         "value":    0,
         "data":     data_hex,
         "chainId":  137,
     }
     signed = acct.sign_transaction(tx)
-    return signed.rawTransaction.hex()
+    return signed.raw_transaction.hex()
 
 # ── Specific routes FIRST ──────────────────────────────────────────────────────
 
