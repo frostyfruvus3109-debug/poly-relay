@@ -1,5 +1,6 @@
 flask
 requests
-eth-account
-eth-utils
-rlp
+gunicorn
+eth-account>=0.8.0
+eth-utils>=2.0.0
+rlp>=3.0.0
